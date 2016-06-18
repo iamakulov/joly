@@ -35,15 +35,17 @@ ApplicationActionsProvider::ApplicationActionsProvider(QObject *parent) :
  */
 void ApplicationActionsProvider::requestPossibleActions(const QString &request)
 {
-    QList<AppInfo> appsList = m_appsInterface->getFilteredList(request);
+    QList<AppInfo> appsList = m_appsInterface->getApps();
+    QList<AppInfo> filteredList = findRelevantApps(appsList, request);
 
     QList<ActionPointer> actions;
-    for (auto app : appsList) {
+    for (auto app : filteredList) {
         actions.append( convertAppInfoToAction(app) );
     }
 
-    if (actions.length() != 0)
+    if (actions.length() != 0) {
         emit actionsAvailable(actions);
+    }
 }
 
 /**
@@ -55,6 +57,90 @@ void ApplicationActionsProvider::requestPossibleActions(const QString &request)
 void ApplicationActionsProvider::cancelCurrentRequest()
 {
     return;
+}
+
+QList<AppInfo> ApplicationActionsProvider::findRelevantApps(const QList<AppInfo> &apps, QString request) const
+{
+    if (request.isEmpty()) {
+        return apps;
+    }
+
+    QList<AppInfo> filteredApps = filterApps(apps, request);
+    QList<QPair<AppInfo, int>> appsWithRelevance = assignAppRelevance(filteredApps, request);
+    QList<AppInfo> sortedApps = getAppsSortedByRelevance(appsWithRelevance);
+
+    return sortedApps;
+}
+
+QList<AppInfo> ApplicationActionsProvider::filterApps(const QList<AppInfo> &apps, QString request) const
+{
+    QList<AppInfo> result;
+
+    for (const AppInfo &appInfo : apps) {
+        QString joinedKeywords = appInfo.getKeywords().join("");
+        if (appInfo.getName().contains(request, Qt::CaseInsensitive) ||
+                appInfo.getGenericName().contains(request, Qt::CaseInsensitive) ||
+                joinedKeywords.contains(request, Qt::CaseInsensitive)) {
+            result.append(appInfo);
+        }
+    }
+
+    return result;
+}
+
+QList<QPair<AppInfo, int>> ApplicationActionsProvider::assignAppRelevance(const QList<AppInfo> &apps, QString request) const
+{
+    QList<QPair<AppInfo, int>> result;
+
+    for (const AppInfo &appInfo : apps) {
+        int relevance = 0;
+
+        // 1
+        if (appInfo.getName().contains(request, Qt::CaseInsensitive)) {
+            relevance += 5;
+        }
+
+        // 2
+        QStringList nameWords = appInfo.getName().split(" ", QString::SkipEmptyParts);
+        int wordStartingCount = std::count_if(nameWords.constBegin(), nameWords.constEnd(), [=](QString word) {
+            return word.startsWith(request);
+        });
+        relevance += wordStartingCount * 2;
+
+        // 3
+        if (appInfo.getGenericName().contains(request, Qt::CaseInsensitive)) {
+            relevance += 2;
+        }
+
+        // 4
+        QStringList keywords = appInfo.getKeywords();
+        int occurrenceCount = std::count_if(keywords.constBegin(), keywords.constEnd(), [=](QString keyword) {
+            return keyword.contains(request);
+        });
+        if (occurrenceCount > 0) {
+            relevance += 2;
+        }
+
+        result.append(qMakePair(appInfo, relevance));
+    }
+
+    return result;
+}
+
+QList<AppInfo> ApplicationActionsProvider::getAppsSortedByRelevance(const QList<QPair<AppInfo, int>> &appRelevanceList) const
+{
+    QList<QPair<AppInfo, int>> sortedPairs = appRelevanceList;
+    qSort(sortedPairs.begin(), sortedPairs.end(), [](auto left, auto right) {
+        // Sort in descending order by the relevance
+        return right.second < left.second;
+    });
+
+    QList<AppInfo> sortedApps;
+    for (const auto pair : sortedPairs) {
+        sortedApps.append(pair.first);
+    }
+
+    return sortedApps;
 }
 
 /**

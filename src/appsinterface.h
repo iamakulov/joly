@@ -80,13 +80,11 @@ public:
     }
 
     /**
-     * @brief Returns information about apps called #appName.
+     * @return All available apps.
      */
-    inline QList<AppInfo> getInfo(const QString &appName) const {
-        return m_appsContainer.getByName(appName);
+    inline QList<AppInfo> getApps() const {
+        return m_appsContainer.apps();
     }
-
-    QList<AppInfo> getFilteredList(const QString &filter) const;
 
 signals:
 

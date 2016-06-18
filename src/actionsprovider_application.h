@@ -45,6 +45,10 @@ public slots:
     void cancelCurrentRequest();
 
 private /*methods*/:
+    QList<AppInfo> findRelevantApps(const QList<AppInfo> &apps, QString request) const;
+    QList<AppInfo> filterApps(const QList<AppInfo> &apps, QString request) const;
+    QList<QPair<AppInfo, int>> assignAppRelevance(const QList<AppInfo> &apps, QString request) const;
+    QList<AppInfo> getAppsSortedByRelevance(const QList<QPair<AppInfo, int>> &apps) const;
     ActionPointer convertAppInfoToAction(const AppInfo &appInfo);
 
 private /*variables*/:

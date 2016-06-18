@@ -48,29 +48,6 @@ AppsInterface *AppsInterface::instance()
 }
 
 /**
- * @brief Returns information about all apps filtered by the #filter.
- */
-QList<AppInfo> AppsInterface::getFilteredList(const QString &filter) const
-{
-    QList<AppInfo> allApps = m_appsContainer.apps();
-
-    if (filter.isEmpty())
-        return allApps;
-
-    QList<AppInfo> result;
-    for (const AppInfo &appInfo : allApps) {
-        QString joinedKeywords = appInfo.getKeywords().join("");
-        if (appInfo.getName().contains(filter, Qt::CaseInsensitive) ||
-                appInfo.getGenericName().contains(filter, Qt::CaseInsensitive) ||
-                joinedKeywords.contains(filter, Qt::CaseInsensitive)) {
-            result.append(appInfo);
-        }
-    }
-
-    return result;
-}
-
-/**
  * @brief Indexes list of apps.
  */
 void AppsInterface::indexApps()
