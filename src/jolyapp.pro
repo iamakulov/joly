@@ -22,45 +22,7 @@ QT       += core gui widgets qml quick quickwidgets
 
 TEMPLATE = app
 
-#windows {
-#    CODECFORTR = UTF-8
-#    QMAKE_CXXFLAGS += -U__STRICT_ANSI__
-#}
-
-#QMAKE_CXXFLAGS += -std=c++11
-
-CONFIG += c++11
-
-
-#RESOURCES += \
-#    joly.qrc
-
-#OTHER_FILES += \
-#    images/window.png \
-#    images/watch.png \
-#    images/up_arrow.png \
-#    images/twitter.png \
-#    images/star.png \
-#    images/search.png \
-#    images/restore_item_transparent.svg \
-#    images/restore_item_transparent.png \
-#    images/remove_item_transparent.svg \
-#    images/remove_item_transparent.png \
-#    images/remove_item.png \
-#    images/question.svg \
-#    images/question.png \
-#    images/outline_star.png \
-#    images/logo_small.png \
-#    images/logo_middle.png \
-#    images/logo_light.png \
-#    images/logo_dark.png \
-#    images/globe.png \
-#    images/folder.png \
-#    images/file.png \
-#    images/equal.png \
-#    images/email.png \
-#    images/down_arrow.png \
-#    images/command.png
+CONFIG += c++14
 
 HEADERS += \
     action.h \
@@ -74,7 +36,6 @@ HEADERS += \
     filesystemwatcher.h \
     globals.h \
     qmlactioniconprovider.h \
-    qmlbackgroundprovider.h \
     userinterface.h \
     appsinterface.h
 
@@ -89,7 +50,6 @@ SOURCES += \
     filesystemwatcher.cpp \
     main.cpp \
     qmlactioniconprovider.cpp \
-    qmlbackgroundprovider.cpp \
     userinterface.cpp \
     appsinterface.cpp \
     action_application.cpp
@@ -97,4 +57,5 @@ SOURCES += \
 DISTFILES += \
     ui/Completer.qml \
     ui/SearchField.qml \
-    ui/Window.qml
+    ui/Root.qml \
+    ui/ShadowContainer.qml

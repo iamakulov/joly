@@ -1,20 +1,19 @@
 #ifndef USERINTERFACE_H
 #define USERINTERFACE_H
 
-#include <QQuickWidget>
 #include <QQmlApplicationEngine>
 
 class ActionsProvider;
 class QQuickImageProvider;
 
-class UserInterface : public QQuickWidget
+class UserInterface : public QObject
 {
     Q_OBJECT
 public:
-    explicit UserInterface(QWidget *parent = 0);
+    explicit UserInterface(QObject *parent = nullptr);
 
     void addImageProvider(QString name, QQuickImageProvider *provider);
-    void setActionProvider(ActionsProvider *actionsProvider);
+    void setActionsProvider(ActionsProvider *actionsProvider);
 
 public slots:
     void show();
@@ -32,7 +31,7 @@ private /*variables*/:
     QQmlApplicationEngine m_engine;
 
     bool m_isLoaded = false;
-    const QString m_interfaceSource = "../../Joly/src/ui/Window.qml";
+    const QString m_interfaceSource = "../../Joly/src/ui/Root.qml";
 };
 
 #endif // USERINTERFACE_H

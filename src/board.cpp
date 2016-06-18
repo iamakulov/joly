@@ -35,7 +35,6 @@
 #include "actionsprovider.h"
 #include "filesystemwatcher.h"
 #include "qmlactioniconprovider.h"
-#include "qmlbackgroundprovider.h"
 
 using namespace std;
 
@@ -43,8 +42,7 @@ Board::Board(QApplication *a)
 {
     m_app = a;
     m_userInterface.addImageProvider("ActionIcons", new QmlActionIconProvider);
-    m_userInterface.addImageProvider("Background", new QmlBackgroundProvider);
-    m_userInterface.setActionProvider(&m_actionsProvider);
+    m_userInterface.setActionsProvider(&m_actionsProvider);
 }
 
 void Board::start()

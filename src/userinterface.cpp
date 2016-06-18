@@ -6,12 +6,9 @@
 #include <QPropertyAnimation>
 #include "actionsprovider.h"
 
-UserInterface::UserInterface(QWidget *parent) :
-    QQuickWidget(parent)
+UserInterface::UserInterface(QObject *parent)
+    : QObject(parent)
 {
-    setWindowOpacity(0);
-    setResizeMode(QQuickWidget::SizeRootObjectToView);
-
     // Sharing some data and methods between C++ and QML parts
     m_engine.rootContext()->setContextProperty("userInterface", this);
 }
@@ -21,7 +18,7 @@ void UserInterface::addImageProvider(QString name, QQuickImageProvider *provider
     m_engine.addImageProvider(QLatin1String(name.toLatin1()), provider);
 }
 
-void UserInterface::setActionProvider(ActionsProvider *actionsProvider)
+void UserInterface::setActionsProvider(ActionsProvider *actionsProvider)
 {
     m_actionsProvider = actionsProvider;
     m_engine.rootContext()->setContextProperty("actionsModel", m_actionsProvider->getModel());
@@ -34,12 +31,11 @@ void UserInterface::show()
         m_isLoaded = true;
     }
 
-    QMetaObject::invokeMethod(rootObject(), "showFullScreen");
+    QMetaObject::invokeMethod(rootObject(), "show");
 }
 
 void UserInterface::hide()
 {
-    qobject_cast<QQuickWindow*>(rootObject())->grabWindow().save("2.png");
     QMetaObject::invokeMethod(rootObject(), "hide");
 }
 

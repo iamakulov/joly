@@ -1,9 +1,9 @@
-import QtQuick 2.2
-import QtQuick.Controls 1.1
-import QtQuick.Controls.Styles 1.1
+import QtQuick 2.4
+import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
 
 FocusScope {
-    id: scope
+    id: container
 
     property var completer
     property alias placeholder: field.placeholderText
@@ -11,26 +11,36 @@ FocusScope {
 
     signal input(string text)
 
-    TextField {
-        id: field
-
+    Rectangle {
+        id: rectangle
         anchors.fill: parent
-        focus: true
-        style: TextFieldStyle {
-            background: Rectangle {
-                radius: 3
-                color: Qt.rgba(0, 0, 0, 0.6)
+
+        border.width: 1
+        border.color: "#ccc"
+        color: "#fff"
+        radius: 4 * 1.5
+
+        TextField {
+            id: field
+
+            anchors.fill: parent
+            focus: true
+            style: TextFieldStyle {
+                background: Rectangle {
+                    color: "transparent"
+                }
+                placeholderTextColor: "#999"
+                font.pointSize: 32
+                font.family: "Segoe UI Light"
             }
-            placeholderTextColor: "#aeaeae"
-            textColor: "#ececec"
-        }
 
-        onTextChanged: {
-            scope.input(text);
-        }
+            onTextChanged: {
+                container.input(text);
+            }
 
-        onAccepted: {
-            completer.launchActiveAction();
+            onAccepted: {
+                completer.launchActiveAction();
+            }
         }
     }
 

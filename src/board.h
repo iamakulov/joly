@@ -30,10 +30,6 @@
 #include "actionsprovider.h"
 #include "userinterface.h"
 
-class G_GlobalLine;
-class QSystemTrayIcon;
-class QMenu;
-class SettingsWidget;
 class QApplication;
 
 class Board : public QObject

@@ -1,4 +1,5 @@
-import QtQuick 2.0
+import QtQuick 2.4
+import QtQuick.Window 2.2
 
 Rectangle {
     id: completer
@@ -7,10 +8,10 @@ Rectangle {
     property alias currentIndex: listView.currentIndex
     property alias currentItem: listView.currentItem
     property alias model: listView.model
-    property int topMargin: 3
-    property int bottomMargin: 3
+    property int topMargin: Math.round(3 * 1.5)
+    property int bottomMargin: Math.round(3 * 1.5)
     property int spacing: 0
-    property int itemHeight: 24
+    property int itemHeight: Math.round(32 * 1.5)
 
     signal launchAction(int actionId)
 
@@ -35,9 +36,10 @@ Rectangle {
         }
     }
 
-    color: Qt.rgba(0, 0, 0, 0.6)
-    height: topMargin + count * itemHeight + (count - 1) * spacing + bottomMargin
-    radius: 3
+    border.width: 1
+    border.color: "#ccc"
+    color: "#fff"
+    radius: 4 * 1.5
 
     ListView {
         id: listView
@@ -59,37 +61,33 @@ Rectangle {
                 // model.actionId is an unique action identifier defined amd managed in action.h/.cpp.
                 source: "image://ActionIcons/" + model.actionId
 
-                height: 16
-                width: 16
+                height: 24 * 1.5
+                width: 24 * 1.5
 
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
-                anchors.leftMargin: 4
+                anchors.leftMargin: 4 * 1.5
             }
 
             Text {
                 id: delegateText
 
                 text: model.text
-                color: "#ececec"
+                font.pointSize: 16
+                font.family: "Segoe UI"
+                color: "#333"
 
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: delegateImage.right
-                anchors.leftMargin: 4
+                anchors.leftMargin: 4 * 1.5
             }
         }
 
         highlight: Rectangle {
             width: completer.width
             height: completer.itemHeight
-            color: Qt.rgba(255, 255, 255, 0.2)
+            color: "#10000000"
             y: (listView.currentItem) ? listView.currentItem.y : 0;
-
-            Behavior on y {
-                SmoothedAnimation {
-                    duration: 250
-                }
-            }
         }
 
         /* #highlightFollowsCurrentItem is disabled because we implement
@@ -119,18 +117,6 @@ Rectangle {
                 completer.currentIndex = indexAt;
         }
     }
-
-    states: [
-        State {
-            name: "hidden"
-            when: model.count === 0
-
-            PropertyChanges {
-                target: completer
-                visible: false
-            }
-        }
-    ]
 }
 
 /*
