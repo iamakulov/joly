@@ -19,7 +19,6 @@
  **************************************/
 
 #include "actionsprovider.h"
-//#include "jolysrvinterface.h"
 #include "appinfo.h"
 
 ActionsProvider::ActionsProvider(QObject *parent) :

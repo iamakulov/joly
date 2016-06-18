@@ -36,8 +36,6 @@ public:
     void addSection(Action::Kind sectionKind, const QList<ActionPointer> &actions);
     void clear();
 
-//    QIcon getIconForActionNumber(int actionNumber);
-
 signals:
     void countChanged();
 
