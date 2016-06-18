@@ -18,7 +18,7 @@ QPixmap QmlActionIconProvider::requestPixmap(const QString &id, QSize *size, con
 {
     Q_UNUSED(requestedSize);
 
-    int iconSize = 16;
+    int iconSize = 64;
     if (size)
         *size = QSize(iconSize, iconSize);
 
