@@ -23,7 +23,7 @@
 
 #include <QObject>
 #include "actionsmodel.h"
-#include "actionsprovider_application.h"
+#include "applicationactionsprovider.h"
 
 class Action;
 

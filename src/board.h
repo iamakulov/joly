@@ -26,8 +26,8 @@
 #include <QCoreApplication>
 #include <QQmlApplicationEngine>
 
-#include "action.h"
-#include "actionsprovider.h"
+#include "actions/action.h"
+#include "actionsproviders/actionsprovider.h"
 #include "userinterface.h"
 
 class QApplication;

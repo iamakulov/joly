@@ -22,7 +22,7 @@
 #define ACTIONSPROVIDER_APPLICATION_H
 
 #include <QObject>
-#include "action.h"
+#include "../actions/applicationaction.h"
 
 class AppsInterface;
 

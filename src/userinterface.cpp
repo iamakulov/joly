@@ -4,7 +4,7 @@
 #include <QQuickItem>
 #include <QTimer>
 #include <QPropertyAnimation>
-#include "actionsprovider.h"
+#include "actionsproviders/actionsprovider.h"
 
 UserInterface::UserInterface(QObject *parent)
     : QObject(parent)

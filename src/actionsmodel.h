@@ -3,7 +3,7 @@
 
 #include <QAbstractListModel>
 #include <QLinkedList>
-#include "action.h"
+#include "actions/action.h"
 #include "qmlactioniconprovider.h"
 
 /**

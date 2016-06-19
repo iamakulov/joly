@@ -29,10 +29,8 @@
 #include <QQmlContext>
 #include <QQuickItem>
 #include <QApplication>
-#include "action.h"
 #include "board.h"
 #include "globals.h"
-#include "actionsprovider.h"
 #include "filesystemwatcher.h"
 #include "qmlactioniconprovider.h"
 

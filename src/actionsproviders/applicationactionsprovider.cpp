@@ -18,7 +18,7 @@
  * along with Joly. If not, see <http://www.gnu.org/licenses/>.
  **************************************/
 
-#include "actionsprovider_application.h"
+#include "applicationactionsprovider.h"
 #include <QtCore>
 #include <QDebug>
 #include "appinfo.h"

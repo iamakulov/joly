@@ -25,10 +25,9 @@ TEMPLATE = app
 CONFIG += c++14
 
 HEADERS += \
-    action.h \
+    actions/action.h \
     actionsmodel.h \
-    actionsprovider.h \
-    actionsprovider_application.h \
+    actionsproviders/actionsprovider.h \
     appinfo.h \
     appscontainer.h \
     board.h \
@@ -37,13 +36,14 @@ HEADERS += \
     globals.h \
     qmlactioniconprovider.h \
     userinterface.h \
-    appsinterface.h
+    appsinterface.h \
+    actions/applicationaction.h \
+    actionsproviders/applicationactionsprovider.h
 
 SOURCES += \
-    action.cpp \
+    actions/action.cpp \
     actionsmodel.cpp \
-    actionsprovider.cpp \
-    actionsprovider_application.cpp \
+    actionsproviders/actionsprovider.cpp \
     appinfo.cpp \
     appscontainer.cpp \
     board.cpp \
@@ -52,7 +52,8 @@ SOURCES += \
     qmlactioniconprovider.cpp \
     userinterface.cpp \
     appsinterface.cpp \
-    action_application.cpp
+    actions/applicationaction.cpp \
+    actionsproviders/applicationactionsprovider.cpp
 
 DISTFILES += \
     ui/Completer.qml \
