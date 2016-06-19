@@ -29,8 +29,8 @@
 
 int main(int argc, char* argv[]){
     QApplication app(argc, argv);
-    app.setOrganizationName ("Ivan Akulov");
-    app.setApplicationName ("Joly");
+    app.setOrganizationName("Ivan Akulov");
+    app.setApplicationName("Joly");
 
     Board* board = new Board(&app);
     board->start();
