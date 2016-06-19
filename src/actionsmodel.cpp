@@ -42,7 +42,7 @@ QVariant ActionsModel::data(const QModelIndex &index, int role) const
 
     // Getting necessary action
     auto it = constGetIteratorAt(m_actions, row);
-    Q_ASSERT(it != m_actions.end());
+    Q_ASSERT(it != m_actions.constEnd());
     ActionPointer action = *it;
 
     // Returning the role
