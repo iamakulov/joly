@@ -56,7 +56,7 @@ class Action
 {
 public:
     enum Kind {
-        Kind_Contextual,
+        Kind_Calculation,
         Kind_Application
     };
 

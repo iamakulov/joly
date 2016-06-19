@@ -24,6 +24,7 @@
 ActionsProvider::ActionsProvider(QObject *parent) :
     QObject(parent)
 {
+    connect(&m_calculationProvider, SIGNAL(actionsAvailable(QList<ActionPointer>)), SLOT(newActionsAvailable(QList<ActionPointer>)));
     connect(&m_appsProvider, SIGNAL(actionsAvailable(QList<ActionPointer>)), SLOT(newActionsAvailable(QList<ActionPointer>)));
 }
 
@@ -42,10 +43,15 @@ void ActionsProvider::requestPossibleActions(const QString &request)
 {
     m_actionsModel.clear();
 
-    m_appsProvider.cancelCurrentRequest();
+    if (!request.isEmpty()) {
+        // Calculation provider
+        m_calculationProvider.cancelCurrentRequest();
+        m_calculationProvider.requestPossibleActions(request);
 
-    if (!request.isEmpty())
+        // Apps provider
+        m_appsProvider.cancelCurrentRequest();
         m_appsProvider.requestPossibleActions(request);
+    }
 }
 
 /**

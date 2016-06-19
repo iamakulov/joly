@@ -18,7 +18,7 @@
 # along with Joly. If not, see <http://www.gnu.org/licenses/>.
 ##################################################
 
-QT       += core gui widgets qml quick quickwidgets
+QT       += core gui widgets qml quick quickwidgets script
 
 TEMPLATE = app
 
@@ -37,7 +37,10 @@ HEADERS += \
     userinterface.h \
     appsinterface.h \
     actions/applicationaction.h \
-    actionsproviders/applicationactionsprovider.h
+    actionsproviders/applicationactionsprovider.h \
+    actions/calculationaction.h \
+    actionsproviders/calculationactionsprovider.h \
+    calculator.h
 
 SOURCES += \
     actions/action.cpp \
@@ -52,10 +55,16 @@ SOURCES += \
     userinterface.cpp \
     appsinterface.cpp \
     actions/applicationaction.cpp \
-    actionsproviders/applicationactionsprovider.cpp
+    actionsproviders/applicationactionsprovider.cpp \
+    actions/calculationaction.cpp \
+    actionsproviders/calculationactionsprovider.cpp \
+    calculator.cpp
 
 DISTFILES += \
     ui/Completer.qml \
     ui/SearchField.qml \
     ui/Root.qml \
     ui/ShadowContainer.qml
+
+RESOURCES += \
+    resources.qrc
