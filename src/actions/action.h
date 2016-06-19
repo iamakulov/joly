@@ -57,6 +57,7 @@ class Action
 public:
     enum Kind {
         Kind_Calculation,
+        Kind_Website,
         Kind_Application
     };
 

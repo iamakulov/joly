@@ -24,6 +24,7 @@
 #include <QObject>
 #include "actionsmodel.h"
 #include "calculationactionsprovider.h"
+#include "websiteactionsprovider.h"
 #include "applicationactionsprovider.h"
 
 class Action;
@@ -54,6 +55,7 @@ private slots:
 
 private /*variables*/:
     CalculationActionsProvider m_calculationProvider;
+    WebsiteActionsProvider m_websiteProvider;
     ApplicationActionsProvider m_appsProvider;
     /***** Future
     HistoryProvider m_historyProvider;
