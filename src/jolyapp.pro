@@ -31,7 +31,6 @@ HEADERS += \
     appinfo.h \
     appscontainer.h \
     board.h \
-    fileinfo.h \
     filesystemwatcher.h \
     globals.h \
     qmlactioniconprovider.h \
