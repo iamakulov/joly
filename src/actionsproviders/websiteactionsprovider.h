@@ -18,7 +18,7 @@ public slots:
     void cancelCurrentRequest();
 
 private /* methods */:
-    QUrl convertToUrl(QString rawUrl) const;
+    QUrl convertToUrl(QString rawUrl, bool *ok = nullptr) const;
     bool isUrlAppropriate(QUrl url) const;
 
 private /* members */:

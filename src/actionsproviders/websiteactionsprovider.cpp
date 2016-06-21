@@ -11,8 +11,9 @@ WebsiteActionsProvider::WebsiteActionsProvider(QObject *parent) : QObject(parent
 
 void WebsiteActionsProvider::requestPossibleActions(const QString &request)
 {
-    QUrl url = convertToUrl(request);
-    if (!url.isEmpty()) {
+    bool isConversionSuccessful = true;
+    QUrl url = convertToUrl(request, &isConversionSuccessful);
+    if (isConversionSuccessful) {
         WebsiteAction *action = new WebsiteAction;
         action->setUrl(url);
         emit actionsAvailable(QList<ActionPointer> { ActionPointer(action) });
@@ -24,7 +25,7 @@ void WebsiteActionsProvider::cancelCurrentRequest()
     // Do nothing
 }
 
-QUrl WebsiteActionsProvider::convertToUrl(QString rawUrl) const
+QUrl WebsiteActionsProvider::convertToUrl(QString rawUrl, bool *ok) const
 {
     QString normalizedUrlString = rawUrl.trimmed().toLower();
     bool urlStringHasScheme = QUrl(normalizedUrlString).scheme().length() > 0;
@@ -34,8 +35,19 @@ QUrl WebsiteActionsProvider::convertToUrl(QString rawUrl) const
 
     // If the raw URL has scheme, it’s always OK
     bool isUrlOK = urlStringHasScheme || isUrlAppropriate(convertedUrl);
+    if (isUrlOK) {
+        if (ok) {
+            *ok = true;
+        }
 
-    return isUrlOK ? convertedUrl : QUrl();
+        return convertedUrl;
+    } else {
+        if (ok) {
+            *ok = false;
+        }
+
+        return QUrl();
+    }
 }
 
 bool WebsiteActionsProvider::isUrlAppropriate(QUrl url) const
