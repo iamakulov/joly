@@ -12,16 +12,14 @@ void TLDRetriever::retrieve(std::function<void(QStringList)> callback)
         return;
     }
 
-    QObject::connect(&m_networkManager, &QNetworkAccessManager::finished, [=](QNetworkReply *reply) {
+    QNetworkReply *reply = m_networkManager.get(QNetworkRequest(m_tldListUrl));
+    QObject::connect(reply, &QNetworkReply::finished, [=]() {
         m_domains = parseDomains(QString(reply->readAll()));
 
         callback(m_domains);
 
-        m_networkManager.disconnect(SIGNAL(finished(QNetworkReply*)));
         reply->deleteLater();
     });
-
-    m_networkManager.get(QNetworkRequest(m_tldListUrl));
 }
 
 QStringList TLDRetriever::parseDomains(QString data)
