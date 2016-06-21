@@ -41,7 +41,9 @@ HEADERS += \
     actions/calculationaction.h \
     actionsproviders/calculationactionsprovider.h \
     calculator.h \
+    actions/emailaction.h \
     actions/websiteaction.h \
+    actionsproviders/emailactionsprovider.h \
     actionsproviders/websiteactionsprovider.h \
     tldretriever.h
 
@@ -62,7 +64,9 @@ SOURCES += \
     actions/calculationaction.cpp \
     actionsproviders/calculationactionsprovider.cpp \
     calculator.cpp \
+    actions/emailaction.cpp \
     actions/websiteaction.cpp \
+    actionsproviders/emailactionsprovider.cpp \
     actionsproviders/websiteactionsprovider.cpp \
     tldretriever.cpp
 

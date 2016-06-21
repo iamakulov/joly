@@ -26,6 +26,7 @@ ActionsProvider::ActionsProvider(QObject *parent) :
 {
     connect(&m_calculationProvider, SIGNAL(actionsAvailable(QList<ActionPointer>)), SLOT(newActionsAvailable(QList<ActionPointer>)));
     connect(&m_websiteProvider, SIGNAL(actionsAvailable(QList<ActionPointer>)), SLOT(newActionsAvailable(QList<ActionPointer>)));
+    connect(&m_emailProvider, SIGNAL(actionsAvailable(QList<ActionPointer>)), SLOT(newActionsAvailable(QList<ActionPointer>)));
     connect(&m_appsProvider, SIGNAL(actionsAvailable(QList<ActionPointer>)), SLOT(newActionsAvailable(QList<ActionPointer>)));
 }
 
@@ -52,6 +53,10 @@ void ActionsProvider::requestPossibleActions(const QString &request)
         // Website provider
         m_websiteProvider.cancelCurrentRequest();
         m_websiteProvider.requestPossibleActions(request);
+
+        // Email provider
+        m_emailProvider.cancelCurrentRequest();
+        m_emailProvider.requestPossibleActions(request);
 
         // Apps provider
         m_appsProvider.cancelCurrentRequest();

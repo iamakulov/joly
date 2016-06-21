@@ -25,6 +25,7 @@
 #include "actionsmodel.h"
 #include "calculationactionsprovider.h"
 #include "websiteactionsprovider.h"
+#include "emailactionsprovider.h"
 #include "applicationactionsprovider.h"
 
 class Action;
@@ -56,6 +57,7 @@ private slots:
 private /*variables*/:
     CalculationActionsProvider m_calculationProvider;
     WebsiteActionsProvider m_websiteProvider;
+    EmailActionsProvider m_emailProvider;
     ApplicationActionsProvider m_appsProvider;
     /***** Future
     HistoryProvider m_historyProvider;

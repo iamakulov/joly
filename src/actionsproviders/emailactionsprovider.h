@@ -1,14 +1,14 @@
-#ifndef CALCULATIONACTIONSPROVIDER_H
-#define CALCULATIONACTIONSPROVIDER_H
+#ifndef EMAILACTIONSPROVIDER_H
+#define EMAILACTIONSPROVIDER_H
 
 #include <QObject>
-#include "../actions/calculationaction.h"
+#include "../actions/emailaction.h"
 
-class CalculationActionsProvider : public QObject
+class EmailActionsProvider : public QObject
 {
     Q_OBJECT
 public:
-    explicit CalculationActionsProvider(QObject *parent = 0);
+    explicit EmailActionsProvider(QObject *parent = 0);
 
 signals:
     void actionsAvailable(const QList<ActionPointer> &actions);
@@ -16,6 +16,12 @@ signals:
 public slots:
     void requestPossibleActions(const QString &request);
     void cancelCurrentRequest();
+
+private /* methods */:
+    bool validateEmail(const QString &email);
+
+private /* members */:
+    QStringList m_topLevelDomains;
 };
 
-#endif // CALCULATIONACTIONSPROVIDER_H
+#endif // EMAILACTIONSPROVIDER_H

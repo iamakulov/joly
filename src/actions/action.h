@@ -58,6 +58,7 @@ public:
     enum Kind {
         Kind_Calculation,
         Kind_Website,
+        Kind_Email,
         Kind_Application
     };
 
